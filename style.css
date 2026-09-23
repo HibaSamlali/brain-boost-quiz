@@ -1,0 +1,116 @@
+:root {
+  --ink: #1b2340;
+  --muted: #5b6482;
+  --bg: #f4f6ff;
+  --surface: #ffffff;
+  --line: #d9def2;
+  --primary: #3b4cca;
+  --primary-dark: #2f3ea8;
+  --accent: #ffc94a;
+  --good: #15803d;
+  --good-bg: #dcfce7;
+  --bad: #b91c1c;
+  --bad-bg: #fee2e2;
+  --radius: 16px;
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+ 
+.card {
+  width: 100%;
+  max-width: 560px;
+  padding: 36px;
+  background: var(--surface);
+  border-radius: 24px;
+  border-top: 8px solid var(--accent);
+  box-shadow: 0 20px 50px rgba(27, 35, 64, 0.12);
+}
+ 
+[hidden] { display: none !important; }
+ 
+h1 { margin: 0 0 12px; font-size: 2.4rem; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; }
+h2 { margin: 24px 0; font-size: 1.5rem; font-weight: 800; line-height: 1.25; outline: none; }
+.lead { margin: 0 0 24px; color: var(--muted); font-size: 1.1rem; }
+.best { margin: -8px 0 24px; font-weight: 700; color: var(--primary); }
+ 
+.screen { animation: enter 0.35s ease; }
+@keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+ 
+.quiz-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 700; color: var(--muted); }
+ 
+.progress { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.progress-bar { height: 100%; width: 0; background: var(--primary); border-radius: 99px; transition: width 0.4s ease; }
+ 
+.answers { display: grid; gap: 12px; }
+ 
+.answer-btn {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; padding: 14px 16px;
+  font: inherit; font-weight: 700; text-align: left; color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line); border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+.answer-btn .key {
+  flex: none; display: grid; place-items: center;
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--bg); color: var(--primary); font-weight: 800;
+}
+.answer-btn:hover:not(:disabled) { border-color: var(--primary); transform: translateX(3px); }
+.answer-btn:disabled { cursor: default; }
+.answer-btn.correct { background: var(--good-bg); border-color: var(--good); }
+.answer-btn.correct .key { background: var(--good); color: #fff; }
+.answer-btn.wrong { background: var(--bad-bg); border-color: var(--bad); }
+.answer-btn.wrong .key { background: var(--bad); color: #fff; }
+ 
+.feedback { min-height: 3em; margin: 16px 0; font-weight: 700; }
+.feedback.good { color: var(--good); }
+.feedback.bad { color: var(--bad); }
+ 
+.btn {
+  padding: 13px 26px; font: inherit; font-weight: 800;
+  border: 2px solid transparent; border-radius: 12px; cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary { background: transparent; color: var(--primary); border-color: var(--line); }
+.btn-secondary:hover { border-color: var(--primary); }
+ 
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+ 
+#result-screen { text-align: center; }
+.ring {
+  --pct: 0;
+  width: 150px; height: 150px; margin: 0 auto 8px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: conic-gradient(var(--primary) calc(var(--pct) * 1%), var(--line) 0);
+  position: relative;
+}
+.ring::before { content: ""; position: absolute; inset: 14px; background: var(--surface); border-radius: 50%; }
+.ring span { position: relative; font-size: 1.9rem; font-weight: 900; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+ 
+@media (max-width: 480px) {
+  .card { padding: 24px 20px; }
+  h1 { font-size: 2rem; }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+ 
